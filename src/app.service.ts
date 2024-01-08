@@ -1,9 +1,17 @@
 import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class AppService {
+    constructor(
+    private readonly configService: ConfigService
+  ) {}
+
   getHello(): string {
-    console.log('执行');
+    const config = this.configService.get('PORT')
+
+    console.log('环境变量config', config);
+
     return 'Hello World!222222';
   }
 }
