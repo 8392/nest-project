@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
 @Injectable()
-export class AppService {
+export class UserService {
     constructor(
     private readonly configService: ConfigService
   ) {}
@@ -12,6 +12,6 @@ export class AppService {
 
     console.log('环境变量config', config);
 
-    return 'Hello World!222222';
+    return '我是user界面';
   }
 }
