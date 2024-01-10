@@ -1,7 +1,6 @@
 import { SharedEntity } from '@/shared/entities/base.entity';
 import { Entity, Column } from 'typeorm';
 
-
 @Entity()
 export class User extends SharedEntity {
   @Column({
@@ -16,7 +15,7 @@ export class User extends SharedEntity {
     type: 'varchar',
     length: 50,
     name: 'password',
-    comment: '用户名',
+    comment: '密码',
   })
   password!: string;
 }

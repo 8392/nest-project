@@ -3,12 +3,10 @@ import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class UserService {
-    constructor(
-    private readonly configService: ConfigService
-  ) {}
+  constructor(private readonly configService: ConfigService) {}
 
   getHello(): string {
-    const config = this.configService.get('PORT')
+    const config = this.configService.get('PORT');
 
     console.log('环境变量config', config);
 
