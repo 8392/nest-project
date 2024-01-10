@@ -16,7 +16,7 @@ datasource:
   port: 3090
   database: nest-project-api
   username: root
-  password: example
+  password: 123456
   charset: utf8mb4
   loc: Asia/Shanghai
   logging: true

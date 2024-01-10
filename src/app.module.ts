@@ -2,9 +2,9 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ApiModule } from './api/api.module';
-import { User } from '@/api/user/entities/user.entity'
+import { User } from '@/api/user/entities/user.entity';
 
-import { getConfig } from './utils'
+import { getConfig } from './utils';
 
 @Module({
   imports: [
@@ -16,29 +16,30 @@ import { getConfig } from './utils'
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
-      useFactory: (configService: ConfigService) => ({
-        type: String(configService.get('datasource.driverName')),
-        host: String(configService.get('datasource.host')),
-        port: Number.parseInt(configService.get('datasource.port') ?? '3306'),
-        username: String(configService.get('datasource.username')),
-        password: String(configService.get('datasource.password')),
-        database: String(configService.get('datasource.database')),
-        // entities: [__dirname + '/**/*.entity{.ts,.js}'],
-        entities: [User],
-        synchronize: true,
-        logging: configService.get('datasource.logging'),
-        timezone: '+08:00', // 东八区
-        cache: {
-          duration: 60000, // 1分钟的缓存
-        },
-        extra: {
-          poolMax: 32,
-          poolMin: 16,
-          queueTimeout: 60000,
-          pollPingInterval: 60, // 每隔60秒连接
-          pollTimeout: 60, // 连接有效60秒
-        },
-      } as TypeOrmModule),
+      useFactory: (configService: ConfigService) =>
+        ({
+          type: String(configService.get('datasource.driverName')),
+          host: String(configService.get('datasource.host')),
+          port: Number.parseInt(configService.get('datasource.port') ?? '3306'),
+          username: String(configService.get('datasource.username')),
+          password: String(configService.get('datasource.password')),
+          database: String(configService.get('datasource.database')),
+          // entities: [__dirname + '/**/*.entity{.ts,.js}'],
+          entities: [User],
+          synchronize: true,
+          logging: configService.get('datasource.logging'),
+          timezone: '+08:00', // 东八区
+          cache: {
+            duration: 60000, // 1分钟的缓存
+          },
+          extra: {
+            poolMax: 32,
+            poolMin: 16,
+            queueTimeout: 60000,
+            pollPingInterval: 60, // 每隔60秒连接
+            pollTimeout: 60, // 连接有效60秒
+          },
+        }) as TypeOrmModule,
     }),
     ApiModule,
   ],
