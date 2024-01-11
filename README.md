@@ -1,13 +1,18 @@
-### 面向对象编程 class写法
+
+# 面向对象编程 class写法
 
 - 引入多个表
+
 ```ts
+
 imports: [TypeOrmModule.forFeature([UserRoleEntity, UserEntity])],
 
 ```
 
 在server层使用
+
 ```ts
+
 class UserRole {
 constructor(
     @InjectRepository(UserRoleEntity)  //使用了两个表，都引入，查询
@@ -18,6 +23,10 @@ constructor(
   ) {}
 }
 ```
+
+## 管道
+
+1. 实现请求数据的校验
 
 ### 计划
 
