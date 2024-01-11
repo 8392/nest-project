@@ -2,7 +2,9 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ApiModule } from './api/api.module';
-import { User } from '@/api/user/entities/user.entity';
+import { UserEntity } from '@/api/user/entities/user.entity';
+import { RoleEntity } from '@/api/role/entities/role.entity';
+import { UserRoleEntity } from '@/api/userRole/entities/userRole.entity';
 
 import { getConfig } from './utils';
 
@@ -25,7 +27,7 @@ import { getConfig } from './utils';
           password: String(configService.get('datasource.password')),
           database: String(configService.get('datasource.database')),
           // entities: [__dirname + '/**/*.entity{.ts,.js}'],
-          entities: [User],
+          entities: [UserEntity, RoleEntity, UserRoleEntity],
           synchronize: true,
           logging: configService.get('datasource.logging'),
           timezone: '+08:00', // 东八区

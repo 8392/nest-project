@@ -1,8 +1,8 @@
 import { SharedEntity } from '@/shared/entities/base.entity';
 import { Entity, Column } from 'typeorm';
 
-@Entity()
-export class User extends SharedEntity {
+@Entity('user')
+export class UserEntity extends SharedEntity {
   @Column({
     type: 'varchar',
     length: 50,

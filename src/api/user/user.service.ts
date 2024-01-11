@@ -1,15 +1,38 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { UserEntity } from './entities/user.entity';
 
 @Injectable()
 export class UserService {
-  constructor(private readonly configService: ConfigService) {}
+  constructor(
+    @InjectRepository(UserEntity)
+    private userRepository: Repository<UserEntity>,
+    private readonly configService: ConfigService,
+  ) {}
 
-  getHello(): string {
-    const config = this.configService.get('PORT');
+  async createUserApi(req): Promise<object> {
+    const data = this.userRepository.create({
+      username: req.username,
+      password: req.password,
+    });
 
-    console.log('环境变量config', config);
+    const user = await this.userRepository.save(data);
+    return user;
+  }
 
-    return '我是user界面';
+  async getListUserApi(req): Promise<Array<object>> {
+    const { page, size } = req;
+    const skip = (page - 1) * size;
+    let query = {};
+    if (page) {
+      query = {
+        skip,
+        take: size,
+      };
+    }
+    const data = await this.userRepository.find(query);
+    return data;
   }
 }
