@@ -8,13 +8,14 @@ import {
   Delete,
 } from '@nestjs/common';
 import { RoleService } from './role.service';
+import { RoleDto } from './dto/role.dto';
 
 @Controller('role')
 export class RoleController {
   constructor(private readonly roleService: RoleService) {}
 
   @Post()
-  async createRoleApi(@Body() req): Promise<object> {
+  async createRoleApi(@Body() req: RoleDto): Promise<object> {
     return this.roleService.createRoleApi(req);
   }
 

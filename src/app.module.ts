@@ -1,10 +1,12 @@
 import { Module } from '@nestjs/common';
+import { APP_PIPE } from '@nestjs/core';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ApiModule } from './api/api.module';
 import { UserEntity } from '@/api/user/entities/user.entity';
 import { RoleEntity } from '@/api/role/entities/role.entity';
 import { UserRoleEntity } from '@/api/userRole/entities/userRole.entity';
+import { ValidationPipe } from './pipe/validation.pipe';
 
 import { getConfig } from './utils';
 
@@ -46,6 +48,11 @@ import { getConfig } from './utils';
     ApiModule,
   ],
   // controllers: [AppController],
-  // providers: [AppService],
+  providers: [
+    {
+      provide: APP_PIPE,
+      useClass: ValidationPipe,
+    },
+  ],
 })
 export class AppModule {}

@@ -3,6 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { RoleEntity } from './entities/role.entity';
+import { RoleDto } from './dto/role.dto';
 
 @Injectable()
 export class RoleService {
@@ -12,7 +13,7 @@ export class RoleService {
     private readonly configService: ConfigService,
   ) {}
 
-  async createRoleApi(req): Promise<object> {
+  async createRoleApi(req: RoleDto): Promise<object> {
     const data = this.roleRepository.create({
       roleName: req.roleName,
       remark: req.remark,
